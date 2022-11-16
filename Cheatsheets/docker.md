@@ -3,9 +3,10 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Installation](#ubuntu-installation)
-3. [Building Images](#building-images)
+4. [Dockerfile](#dockerfile)
+5. [Building Images](#building-images)
     - [Basic build command](#basic-build-command)
-4. [Managing Images](#managing-images)
+6. [Managing Images](#managing-images)
 
 ## INTRODUCTION
 
@@ -48,8 +49,32 @@ You can reboot to make it take effect or...
 
 `su - ${USER}`
 
-## BUILDING IMAGES
+## IMAGES AND CONTAINERS
 
+### Images
+
+Images are the template (instructions) that define the parameters of the container. The image is used to build containers and a single image can build many containers.
+
+### Containers
+
+Containers are packages that contain the application and the environment in which the application runs. 
+
+## IMAGES
+
+Two ways to get images
+
+1. Get a premade image from a place like DockerHub.
+2. Create your own image using a Dockerfile
+
+### Run a container from a DockerHub image
+
+`docker run node`
+
+This command will create and run a container instance from the image. In this example it is using the office nodejs image to create a running instance in a container. Note: this command as it is doesn't do much. 
+
+`docker run -it node`
+
+Adding the -it flag creates an interactive terminal instance where you can interact with the instance of node.
 
 
 ### Basic build command
