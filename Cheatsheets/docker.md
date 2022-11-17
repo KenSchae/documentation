@@ -3,13 +3,17 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Installation](#ubuntu-installation)
-4. [Dockerfile](#dockerfile)
-5. [Building Images](#building-images)
-    - [Basic build command](#basic-build-command)
-6. [Managing Images](#managing-images)
+3. [Concepts](#concepts)
+4. [Images](#images)
+5. [Managing Images](#managing-images)
+6. [Containers](#containers)
+7. [Managing Containers](#managing-containers)
 
 ## INTRODUCTION
 
+This file contains notes and code examples for using Docker. 
+
+I am a big fan of Academind on uDemy and YouTube. Their classes on eDemy are content rich and take you from noob to expert. Maximillian works from hands-on examples that you will actually use in IT. I highly recommend purchasing his course on Docker https://www.udemy.com/course/docker-kubernetes-the-practical-guide/. 
 
 ## UBUNTU INSTALLATION
 
@@ -49,7 +53,7 @@ You can reboot to make it take effect or...
 
 `su - ${USER}`
 
-## IMAGES AND CONTAINERS
+## CONCEPTS
 
 ### Images
 
@@ -61,31 +65,46 @@ Containers are packages that contain the application and the environment in whic
 
 ## IMAGES
 
-Two ways to get images
+### Define your own image using a Dockerfile
 
-1. Get a premade image from a place like DockerHub.
-2. Create your own image using a Dockerfile
+Create a Dockerfile in the project directory. This file is a set of instructions for building a container.
 
-### Run a container from a DockerHub image
+```
+# the baseImage is either a name from DockerHub or is the 
+# name of an Image on your system
+FROM node 
 
-`docker run node`
+# tell Docker where to run commands from
+WORKDIR /app
 
-This command will create and run a container instance from the image. In this example it is using the office nodejs image to create a running instance in a container. Note: this command as it is doesn't do much. 
+# tell Docker which files go into the image
+# COPY localFolder imageFolder 
+COPY . /app
 
-`docker run -it node`
+# do some node stuff
+RUN npm install
 
-Adding the -it flag creates an interactive terminal instance where you can interact with the instance of node.
+# show the port to the world outside of Docker so that the 
+# web pages are visible
+EXPOSE 80
 
+# these commands are executed when a container is instanced
+CMD ["node", "server.js"]
 
-### Basic build command
+```
+
+### Build an image from the Dockerfile. 
+
+Using this command results in a random Image ID that you use to run a container. This is not the way.
 
 `docker build .`
 
-### Assign a Name:Tag to the build
+### Assign a Name:Tag to the image
 
 Assign a name and tag to the image because you are a responsible dev. 
 
 `docker build -t name:tag .`
+
 
 ## MANAGING IMAGES
 
@@ -97,6 +116,26 @@ Assign a name and tag to the image because you are a responsible dev.
 
 ### Remove all dangling (untagged) images
 `docker image prune`
+
+
+## CONTAINERS
+
+### Run a container from a DockerHub image
+
+`docker run node`
+
+This command will create and run a container instance from the image. In this example it is using the office nodejs image to create a running instance in a container. Note: this command as it is doesn't do much. 
+
+`docker run -it node`
+
+Adding the -it flag creates an interactive terminal instance where you can interact with the instance of node.
+
+### Running a container from your own image
+
+After the image is built you will get an ID for the image. Use the ID to start the container. If you are a good dev, then you assigned a name:tag and you use that instead.
+
+`docker run -p 3000:80 e5a737911cca`
+
 
 ## MANAGING CONTAINERS
 
