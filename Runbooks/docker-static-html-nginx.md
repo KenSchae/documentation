@@ -17,3 +17,6 @@ EXPOSE 80
 
 ## Run a container from the image
 `docker run -d -p 8080:80 myproject:v1`
+
+## View the site
+Open a browser at `http://localhost:8080`

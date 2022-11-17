@@ -17,6 +17,8 @@ I am a big fan of Academind on uDemy and YouTube. Their classes on eDemy are con
 
 ## UBUNTU INSTALLATION
 
+hmmmm, this looks like it should be a bash script.
+
 ### Base Install
 As usual, update your packages
 
