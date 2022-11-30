@@ -103,7 +103,7 @@ Using this command results in a random Image ID that you use to run a container.
 
 ### Assign a Name:Tag to the image
 
-Assign a name and tag to the image because you are a responsible dev. 
+Assign a name and tag to the image because you are not a barbarian. 
 
 `docker build -t name:tag .`
 
@@ -159,14 +159,21 @@ Parameters for running a container
 ### List all containers (running and not running)
 `docker ps -a`
 
-### Stop a container
+### Stop a container  
 `docker stop {containername}`
+
+### Start a stopped container  
+`docker start {containername}`
 
 ### Remove a stopped container
 `docker rm {containername}`
 
 ### Remove ALL stopped containers
 `docker container prune`
+
+### Attach to a running container
+Use this if you are running in detached mode and need to attach to see content logged to the console.
+`docker attach {comtainername}`
 
 ## Volumes
 
