@@ -114,11 +114,14 @@ Assign a name and tag to the image because you are not a barbarian.
 `docker images`
 
 ### Remove an image from this server
+Can't remove images that have containers (started and stopped)
 `docker rmi {imagename}`
 
 ### Remove all dangling (untagged) images
 `docker image prune`
 
+### Review detailed information about the image
+`docker image inspect {imageid}`
 
 ## CONTAINERS
 
@@ -141,7 +144,11 @@ After the image is built you will get an ID for the image. Use the ID to start t
 
 ## MANAGING CONTAINERS
 
-Parameters for running a container
+### Running a container
+Get a list of all parameters for running a container
+`docker run --help`
+
+Common parameters for running a container
 |Switch | Description |
 |-------|-------|
 |-p     |(port) map a port|
@@ -153,6 +160,10 @@ Parameters for running a container
 
 `docker run -p 3000:80 -d --rm --name goalsapp goals:latest`
 
+Expose a terminal for console applications. See the Python example.
+`docker run -it {containername}`
+`docker start -a -i {containername}` 
+
 ### List all running containers
 `docker ps`
 
@@ -163,9 +174,10 @@ Parameters for running a container
 `docker stop {containername}`
 
 ### Start a stopped container  
+This command will start a container in detached mode.
 `docker start {containername}`
 
-### Remove a stopped container
+### Remove a stopped container (can't remove a running container)
 `docker rm {containername}`
 
 ### Remove ALL stopped containers
@@ -174,6 +186,17 @@ Parameters for running a container
 ### Attach to a running container
 Use this if you are running in detached mode and need to attach to see content logged to the console.
 `docker attach {comtainername}`
+
+### View logs from a container
+logs are the console output from a container. This command will let you see the content.
+`docker logs {containername}`
+
+### Copy files into or out of a running container
+Copy in
+`docker cp localpath/. {containername}:/pathincontainer`
+Copy out
+`docker cp {containername}:/pathincontainer/. localpath`
+
 
 ## Volumes
 
