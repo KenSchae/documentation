@@ -198,7 +198,7 @@ Copy out
 `docker cp {containername}:/pathincontainer/. localpath`
 
 
-## Volumes
+## VOLUMES
 
 Volumes store persistent data that survives after a container shuts down. These are folders on the host machine that are mounted in the container. 
 
