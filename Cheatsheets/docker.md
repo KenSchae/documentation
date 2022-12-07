@@ -42,6 +42,10 @@ Now do the install from Docker
 
 `sudo apt install docker-ce`
 
+Install docker-compose if needed
+
+`sudo apt install docker-compose`
+
 Make sure it is running
 
 `sudo systemctl status docker`
