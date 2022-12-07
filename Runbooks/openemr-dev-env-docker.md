@@ -1,7 +1,16 @@
 # OpenEMR Development Environment (Docker)
 
 ## TABLE OF CONTENTS
-
+- [Build Development Server](#build-development-server)
+- [Connect Workstation to Server](#connect-workstation-to-server)
+- [Config Server](#config-server)
+- [Install OpenEMR-cmd](#install-openemr-cmd)
+- [Fork the GitHub Repo](#fork-the-github-repo)
+- [Start the Dockers](#start-the-dockers)
+- [Test OpenEMR](#test-openemr)
+- [Sling Some Code](#sling-some-code)
+- [Sample Patient Data](#sample-patient-data-with-synthea)
+- [References](#references)
 
 ## BUILD DEVELOPMENT SERVER
 The OpenEMR video series (and many home lab tutorials) walk you through creating a Linux VM to develop with. The assumption in these videos is that you will use the VM as a workstation AND as a server: everything in one box. I don't like that approach. My preference is to create the VM as a server and then connect to the server from a workstation. 
