@@ -1,16 +1,21 @@
 # OpenEMR Development Environment (Docker)
 
 ## TABLE OF CONTENTS
-- [Build Development Server](#build-development-server)
-- [Connect Workstation to Server](#connect-workstation-to-server)
-- [Config Server](#config-server)
-- [Install OpenEMR-cmd](#install-openemr-cmd)
-- [Fork the GitHub Repo](#fork-the-github-repo)
-- [Start the Dockers](#start-the-dockers)
-- [Test OpenEMR](#test-openemr)
-- [Sling Some Code](#sling-some-code)
-- [Sample Patient Data](#sample-patient-data-with-synthea)
-- [References](#references)
+- [OpenEMR Development Environment (Docker)](#openemr-development-environment-docker)
+  - [TABLE OF CONTENTS](#table-of-contents)
+  - [BUILD DEVELOPMENT SERVER](#build-development-server)
+  - [CONNECT WORKSTATION TO SERVER](#connect-workstation-to-server)
+  - [CONFIG SERVER](#config-server)
+  - [INSTALL OPENEMR-CMD](#install-openemr-cmd)
+  - [FORK THE GITHUB REPO](#fork-the-github-repo)
+  - [START THE DOCKERS](#start-the-dockers)
+    - [BUILD](#build)
+  - [TEST OPENEMR](#test-openemr)
+  - [SLING SOME CODE](#sling-some-code)
+  - [SAMPLE PATIENT DATA WITH SYNTHEA](#sample-patient-data-with-synthea)
+  - [MANAGE DOCKERS](#manage-dockers)
+    - [Resetting the environment](#resetting-the-environment)
+  - [REFERENCES](#references)
 
 ## BUILD DEVELOPMENT SERVER
 The OpenEMR video series (and many home lab tutorials) walk you through creating a Linux VM to develop with. The assumption in these videos is that you will use the VM as a workstation AND as a server: everything in one box. I don't like that approach. My preference is to create the VM as a server and then connect to the server from a workstation. 
@@ -55,6 +60,19 @@ Host arbitrary-name-that-displays-in-vscode
 5. `docker ps` there are 5 dockers for the OpenEMR environment
 6. `openemr-cmd dl` keep running this until the docker is done building (e.g.Apache is running)
 
+### BUILD
+
+If using OpenEMR directly from the code repository, then the following commands will build OpenEMR (Node.js version 16.* is required). This should be done from inside of the docker container 
+
+`openemr-cmd s`
+
+```shell
+composer install --no-dev
+npm install
+npm run build
+composer dump-autoload -o
+```
+
 ## TEST OPENEMR
 1. Open a browser
 2. http://hostname-or-ip-of-server:8300
@@ -77,6 +95,11 @@ Host arbitrary-name-that-displays-in-vscode
 3. Actually I kind of like the coconut donuts
 4. Let's be real, I like all donuts
 5. I am the Homer Simpson of full stack developers
+
+## MANAGE DOCKERS
+
+### Resetting the environment
+
 
 ## REFERENCES
 - [OpenEMR Development Docker Environment](https://github.com/openemr/openemr/blob/master/CONTRIBUTING.md#starting-with-openemr-development-docker-environment)
