@@ -8,6 +8,7 @@
 5. [Managing Images](#managing-images)
 6. [Containers](#containers)
 7. [Managing Containers](#managing-containers)
+8. [Volumes]
 
 ## INTRODUCTION
 
