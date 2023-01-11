@@ -52,10 +52,15 @@ sudo apt install openssh-server
 ssh-keygen
 ```
 
-Go to client machine
+Go to LINUX client machine
 ```
 ssh-keygen
-ssh-copy-d username@ipaddress
+ssh-copy-id username@ipaddress
+```
+Windows client
+```
+ssh-keygen
+Get-Content $env:USERPROFILE\.ssh\id_rsa.pub | ssh <user>@<hostname> "cat >> .ssh/authorized_keys"
 ```
 
 ### Lockdown Logins
@@ -89,7 +94,9 @@ network:
         dhcp4: no
         addresses:
           - 192.168.5.50/24
-        gateway: 192.168.5.99
+        routes: 
+          -to: default
+           via: 192.168.5.99
         nameservers:
             addresses: [192.168.5.25]
 
@@ -162,3 +169,5 @@ sudo systemctl restart fail2ban
 
 sudo fail2ban-client status /* use to review banned */
 ```
+
+## Logging with Prometheus
