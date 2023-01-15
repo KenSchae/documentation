@@ -177,5 +177,13 @@ sudo ufw allow 10000/tcp
 sudo ufw reload
 ```
 
+### bind9 DNS
+```
+sudo apt install -y bind9 bind9utils bind9-doc dnsutils
+sudo systemctl start named
+sudo systemctl enable named
+sudo ufw allow 53
+sudo ufw reload
+```
 
 ### Logging with Prometheus
