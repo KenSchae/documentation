@@ -186,4 +186,54 @@ sudo ufw allow 53
 sudo ufw reload
 ```
 
+### Gitea (GitHub alternative)
+```
+sudo apt install git
+sudo apt install mariadb-server
+sudo mysql -u root -p
+
+CREATE DATABASE gitea;
+GRANT ALL PRIVILEGES ON gitea.* TO 'gitea'@'localhost' IDENTIFIED BY "Root";
+FLUSH PRIVILEGES;
+QUIT;
+
+sudo wget -O /usr/local/bin/gitea https://dl.gitea.io/gitea/1.16.7/gitea-1.16.7-linux-amd64 
+sudo chmod +x /usr/local/bin/gitea
+gitea --version
+
+sudo adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git
+sudo mkdir -pv /var/lib/gitea/{custom,data,log}
+sudo chown -Rv git:git /var/lib/gitea
+sudo chown -Rv git:git /var/lib/gitea
+
+sudo mkdir -v /etc/gitea
+sudo chown -Rv root:git /etc/gitea
+sudo chmod -Rv 770 /etc/gitea
+sudo chmod -Rv 770 /etc/gitea
+
+[Unit]
+Description=Gitea
+After=syslog.target
+After=network.target
+[Service]
+RestartSec=3s
+Type=simple
+User=git
+Group=git
+WorkingDirectory=/var/lib/gitea/
+
+ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
+Restart=always
+Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl start gitea
+sudo systemctl status gitea
+sudo systemctl enable gitea
+
+http://localhost:3000
+```
+
+
 ### Logging with Prometheus
