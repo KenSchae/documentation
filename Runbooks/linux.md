@@ -243,6 +243,10 @@ sudo systemctl enable gitea
 
 # Access gitea
 http://localhost:3000
+
+# If you ever need to change settings like DOMAIN
+sudo nano /etc/gitea/app.ini
+
 ```
 
 
