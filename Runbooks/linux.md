@@ -26,13 +26,12 @@ network:
   ethernets:
     ens18:
         dhcp4: no
-        addresses:
-          - 192.168.5.50/24
-        routes: 
-          -to: default
-           via: 192.168.5.99
+        addresses: [192.168.5.50/24]
         nameservers:
-            addresses: [192.168.5.25]
+            addresses: [192.168.5.25,8.8.8.8]
+        routes: 
+            - to: default
+              via: 192.168.5.99
 
 sudo netplan apply
 ```
