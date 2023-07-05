@@ -38,4 +38,3 @@ Use this command to commit your changes to the current working branch
 
 `git commit -m "initializing a repo"`
 
-
