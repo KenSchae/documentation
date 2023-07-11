@@ -1,22 +1,65 @@
-# Linux Stuff
+# Linux Installation
 
-## Install distro
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Pre Install](#pre-install)
+    - [Select distro](#select-distro)
+    - [Download ISO](#download-iso)
+3. 
 
-## Post install
+## Introduction
+
+This guide focuses on installing Linux on a hypervisor of some sort. At least, that is how I most often use this guide: as a checklist for building out a server, dev environment, or something else Linux related. That said, these steps are valid for building out a box as well.
+
+As far as a hypervisor, I have an old HP Proliant server that is running Windows Server 2019 with Hyper-V installed and I have a newer Proliant that is running Proxmox. This guide doesn't have the specifics of installing on either hypervisor, but I may add that later.
+
+## Pre Install
+
+### Select distro
+
+Asking which distro of linux is the best one is like asking which super-hero is the best in a comic shop. The selection of linux distro hinges upon your requirements and what you intend to accomplish with it. 
+
+The following four are a handful of distros that have remained popular for more than a couple of years. Finding tutorials, YouTube channels, and other assistance is easy for all of these.
+
+1. [Debian](https://www.debian.org/)
+2. [Ubuntu](https://ubuntu.com/)
+3. [Mint](https://linuxmint.com/)
+4. [Fedora](https://fedoraproject.org/)
+
+### Download ISO
+
+When downloading the OS, select an ISO file and try to find the latest stable release or an LTS (Long Term Support) version of the OS. You may select the niche options but these assume that you know what you are doing.
+
+Store the ISO in a place that is accessible to the hypervisor where you will install Linux. I tend to keep a file-share with all of my ISOs. 
+
+## Installation
+
+This section should have two parts. The first would outline the steps for creating a virtual machine on your hypervisor onto which you will install your Linux distro. The second part would outline how to install your distro onto the VM.
+
+Lacking those, I recomment hitting YouTube and the distro's documentation for the step by step to install Linux. It's actually quite easy.
+
+## Post Install
 
 ### Update && Upgrade
+
+Always run these two command immediately after completing the installation because fixes have likely been released since the ISO was created. You should also run these two commands immediately before installing a major piece of software on your instance. Lastly, you should run these on a regular basis to keep your box up to date.
+
 ```
 apt update
 apt upgrade
 ```
 
 ### Automatic Updates
+
+Some hot fixes and security patches should not wait around until you finally decide to actually run the update and upgrade commands above. For this reason, setup unattended upgrades for the important stuff.
+
 ```
 apt install unattended-upgrades
 dpkg-reconfigure --priority=low unattended-upgrades
 ```
 
 ### Static IP
+
 ```
 sudo nano /etc/netplan/01-netcfg.yaml
 
@@ -43,7 +86,7 @@ sudo apt install openssh-server
 ssh-keygen
 ```
 
-### SSH on Client machine
+#### SSH on Client machine
 LINUX client machine
 ```
 ssh-keygen
@@ -55,7 +98,7 @@ ssh-keygen
 Get-Content $env:USERPROFILE\.ssh\id_rsa.pub | ssh <user>@<hostname> "cat >> .ssh/authorized_keys"
 ```
 
-### Lockdown Logins to SSH only
+#### Lockdown Logins to SSH only
 ```
 sudo nano /etc/ssh/sshd_config
 ```
