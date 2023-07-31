@@ -113,6 +113,9 @@ sudo systemctl restart sshd
 ```
 
 ### Fix LVM
+
+This seems to be an Ubuntu thing. Most of the other distros don't need this but it doesn't hurt to check your volumes. Basically, you are making sure that Linux is using the whole hard drive rather than part of it.
+
 ```
 sudo lvm
 lvm > lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv

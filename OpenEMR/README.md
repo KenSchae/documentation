@@ -1,0 +1,1 @@
+We have migrated away from OpenEMR to a proprietary SaaS product. Because my interests lie elsewhere, I will not likely update any of this section anymore.
