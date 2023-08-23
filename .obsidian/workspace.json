@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OpenEMR/openemr-dev-env-docker.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OpenEMR/openemr-dev-env-docker.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OpenEMR/openemr-dev-env-docker.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OpenEMR/openemr-dev-env-docker.md"
+                "file": "README.md"
               }
             }
           }
@@ -148,11 +148,20 @@
   },
   "active": "978efe8fe87f79d0",
   "lastOpenFiles": [
-    "Untitled.canvas",
+    "Azure/AZ-900.md",
+    "Unity3d/rpg-game.md",
+    "README.md",
     "OpenEMR/openemr-dev-env-docker.md",
+    "C#/csharp-path.md",
+    "C#",
+    "Azure/Pasted image 20230822163235.png",
+    "Azure/Pasted image 20230822080155.png",
+    "Azure/Pasted image 20230822075625.png",
+    "Azure/AZ-204.md",
+    "Azure",
+    "Untitled.canvas",
     "Linux/linux-installation.md",
     "OpenEMR/openemr-dev-custom-modules.md",
-    "OpenEMR/event-architecture.md",
-    "README.md"
+    "OpenEMR/event-architecture.md"
   ]
 }
