@@ -1,23 +1,28 @@
-# Linux Installation
-
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Pre Install](#pre-install)
-    - [Select distro](#select-distro)
-    - [Download ISO](#download-iso)
-3. 
-
+1. [[#Introduction]]
+2. [[#Pre Install]]
+	1. [[#Select distro]]
+	2. [[#Download ISO]]
+3. [[#Installation]]
+4. [[#Post Install]]
+	1. [[#Update && Upgrade]]
+	2. [[#Automatic Updates]]
+	3. [[#Static IP]]
+	4. [[#Install openssh]]
+	5. [[#Fix LVM]]
+	6. [[#Change timezone]]
+	7. [[#Configure Firewall]]
+	8. [[#Install fail2ban]]
 ## Introduction
 
 This guide focuses on installing Linux on a hypervisor of some sort. At least, that is how I most often use this guide: as a checklist for building out a server, dev environment, or something else Linux related. That said, these steps are valid for building out a box as well.
 
-As far as a hypervisor, I have an old HP Proliant server that is running Windows Server 2019 with Hyper-V installed and I have a newer Proliant that is running Proxmox. This guide doesn't have the specifics of installing on either hypervisor, but I may add that later.
-
+As far as a hypervisor, I have an old HP ProLiant server that is running Windows Server 2019 with Hyper-V installed and I have a newer ProLiant that is running Proxmox. This guide doesn't have the specifics of installing on either hypervisor, but I may add that later.
 ## Pre Install
 
 ### Select distro
 
-Asking which distro of linux is the best one is like asking which super-hero is the best in a comic shop. The selection of linux distro hinges upon your requirements and what you intend to accomplish with it. 
+Asking which distro of Linux is the best one is like asking which super-hero is the best in a comic shop. The selection of Linux distro hinges upon your requirements and what you intend to accomplish with it. 
 
 The following four are a handful of distros that have remained popular for more than a couple of years. Finding tutorials, YouTube channels, and other assistance is easy for all of these.
 
@@ -36,8 +41,7 @@ Store the ISO in a place that is accessible to the hypervisor where you will ins
 
 This section should have two parts. The first would outline the steps for creating a virtual machine on your hypervisor onto which you will install your Linux distro. The second part would outline how to install your distro onto the VM.
 
-Lacking those, I recomment hitting YouTube and the distro's documentation for the step by step to install Linux. It's actually quite easy.
-
+Lacking those, I recommend hitting YouTube and the distro's documentation for the step by step to install Linux. It's actually quite easy.
 ## Post Install
 
 ### Update && Upgrade
@@ -78,6 +82,8 @@ network:
 
 sudo netplan apply
 ```
+Note: in the routes section make sure the to and via line up together.
+
 
 ### Install openssh
 You can select this during Ubuntu install
@@ -85,7 +91,6 @@ You can select this during Ubuntu install
 sudo apt install openssh-server
 ssh-keygen
 ```
-
 #### SSH on Client machine
 LINUX client machine
 ```
@@ -97,7 +102,6 @@ Windows client
 ssh-keygen
 Get-Content $env:USERPROFILE\.ssh\id_rsa.pub | ssh <user>@<hostname> "cat >> .ssh/authorized_keys"
 ```
-
 #### Lockdown Logins to SSH only
 ```
 sudo nano /etc/ssh/sshd_config
@@ -162,137 +166,4 @@ sudo systemctl restart fail2ban
 sudo fail2ban-client status /* use to review banned */
 ```
 
-## Optional Maintenance
-
-### Create new sudo account
-Ubuntu Server does this by default
-```
-sudo adduser {username}
-sudo usermod -aG sudo {username}
-```
-
-### Disable root
-Ubuntu Server does this by default
-```
-sudo passwd -l root
-```
-
-### Change HOSTNAME
-```
-sudo hostnamectl set-hostname {hostname}
-hostnamectl
-
-sudo nano /etc/hosts
-/* change hostname in hosts file */
-```
-
-## Optional Services
-
-### Install xRDP
-If you need to use RDP to access a desktop environment
-```
-sudo apt install xrdp
-sudo systemctl enable xrdp
-```
-
-### Install GIT
-```
-sudo apt install git
-```
-
-### Install Guest Agent for Proxmox
-Applies only if this box is in a Proxmox server
-
-1. Open Proxmox
-2. Click Options
-3. Turn on QEMU Agent
-
-```
-sudo apt install qemu-guest-agent
-sudo shutdown 
-```
-
-### Install Webmin
-```
-sudo apt install software-properties-common apt-transport-https
-sudo wget -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] http://download.webmin.com/download/repository sarge contrib"
-sudo apt install webmin
-sudo ufw allow 10000/tcp
-sudo ufw reload
-```
-
-### bind9 DNS
-```
-sudo apt install -y bind9 bind9utils bind9-doc dnsutils
-sudo systemctl start named
-sudo systemctl enable named
-sudo ufw allow 53
-sudo ufw reload
-```
-
-### Gitea (GitHub alternative)
-```
-sudo apt install git
-sudo apt install mariadb-server
-
-# Login to MySQL
-sudo mysql -u root -p
-
-# Add the git database
-CREATE DATABASE gitea;
-GRANT ALL PRIVILEGES ON gitea.* TO 'gitea'@'localhost' IDENTIFIED BY "Root";
-FLUSH PRIVILEGES;
-QUIT;
-
-# Install gitea
-sudo wget -O /usr/local/bin/gitea https://dl.gitea.io/gitea/1.16.7/gitea-1.16.7-linux-amd64 
-sudo chmod +x /usr/local/bin/gitea
-gitea --version
-
-# Create gitea user
-sudo adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git
-sudo mkdir -pv /var/lib/gitea/{custom,data,log}
-sudo chown -Rv git:git /var/lib/gitea
-sudo chown -Rv git:git /var/lib/gitea
-
-sudo mkdir -v /etc/gitea
-sudo chown -Rv root:git /etc/gitea
-sudo chmod -Rv 770 /etc/gitea
-sudo chmod -Rv 770 /etc/gitea
-
-# Append code to the service file
-sudo nano /etc/systemd/system/gitea.service
-
-[Unit]
-Description=Gitea
-After=syslog.target
-After=network.target
-[Service]
-RestartSec=3s
-Type=simple
-User=git
-Group=git
-WorkingDirectory=/var/lib/gitea/
-
-ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
-Restart=always
-Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
-[Install]
-WantedBy=multi-user.target
-
-# Start gitea
-sudo systemctl start gitea
-sudo systemctl status gitea
-sudo systemctl enable gitea
-
-# Access gitea
-http://localhost:3000
-
-# If you ever need to change settings like DOMAIN
-sudo nano /etc/gitea/app.ini
-
-```
-
-
-### Logging with Prometheus
+## [[Other Linux based servers]]

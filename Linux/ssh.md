@@ -41,3 +41,4 @@ Note about git: I have noticed that you need to generate keys for both your user
 ### Login to remote server using your key
 
 `ssh username@ip_address`
+
