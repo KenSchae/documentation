@@ -1,9 +1,8 @@
 
 ## Prereqs
 
-1. 
+1. [Install WSL | Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install)
 2. Docker, [Install Docker Desktop on Windows | Docker Docs](https://docs.docker.com/desktop/install/windows-install/)
-	1. [Install WSL | Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install)
 3. Ollama [Download Ollama on Windows](https://ollama.com/download)
  
 
