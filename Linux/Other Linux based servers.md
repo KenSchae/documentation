@@ -130,3 +130,7 @@ sudo nano /etc/gitea/app.ini
 
 ```
 
+
+Note: I put Gitea behind Nginx Proxy where it was listening to port 3000 and redirecting to 443 for SSL with a cert. The problem was that the URLs of the repos still had port 3000 so I would get command line errors when working with repos.
+
+The fix was to edit the /etc/gitea/app.ini file and change the base URL to a normal port 80 URL. e.g., I deleted the :3000 from the base url.

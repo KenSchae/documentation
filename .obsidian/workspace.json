@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/Virtual Web Sites in Apache.md",
+                "file": "Linux/Install Apache web server.md",
                 "mode": "source",
                 "source": false
               }
@@ -40,16 +40,6 @@
                 "file": "Linux/Other Linux based servers.md",
                 "mode": "source",
                 "source": false
-              }
-            }
-          },
-          {
-            "id": "e4faf857f016f4db",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "Networking/FortiNet/Pasted image 20240503073354.png"
               }
             }
           }
@@ -183,23 +173,25 @@
   },
   "active": "d54e3308dbfb89cb",
   "lastOpenFiles": [
+    "Linux/Install Apache web server.md",
+    "Linux/Install Wordpress Behind an NPM Reverse Proxy.md",
+    "Linux/Install PHP on Apache.md",
+    "Linux/Install phpMyAdmin.md",
+    "Linux/Install Ubuntu Linux.md",
+    "Linux/Virtual Web Sites in Apache.md",
+    "Networking/FortiNet/Pasted image 20240503073354.png",
+    "Linux/Other Linux based servers.md",
+    "Docker/docker.md",
+    "Generative AI/Speech to Text with Whisper AI.md",
+    "Generative AI/Setup Local LLM.md",
     "Finished blog post from ChatGPT.md",
     "DALL·E 2024-05-09 14.05.14 - A steampunk style thumbnail for a blog post featuring an AI brain made of gears and circuits. The image combines mechanical elements with electronic c.png",
-    "Linux/Install Wordpress Behind an NPM Reverse Proxy.md",
-    "Linux/Virtual Web Sites in Apache.md",
     "Linux/linux-commands.md",
-    "Linux/Other Linux based servers.md",
-    "Linux/Install phpMyAdmin.md",
-    "Linux/Install Apache web server.md",
     "Linux/Install Docker on Ubuntu.md",
     "Linux/Install MySQL on Ubuntu.md",
-    "Linux/Install PHP on Apache.md",
     "Linux/ubuntu-server.md",
-    "Linux/Install Ubuntu Linux.md",
-    "Generative AI/Speech to Text with Whisper AI.md",
     "Networking/Self Hosting Web Sites.md",
     "Networking/NGINX Proxy Manager.md",
-    "Generative AI/Setup Local LLM.md",
     "Generative AI/Stable Diffusion WebUI AUTOMATIC1111 A Beginner's Guide - Stable Diffusion Art.md",
     "Generative AI/How to Run LLama3 Locally with Ollama and OpenwebUI.md",
     "Generative AI/How to get prompts from images for Stable Diffusion - Stable Diffusion Art.md",
@@ -208,11 +200,9 @@
     "Generative AI/FAQ - Tips & Tricks - Automatic1111 (SD 1.5)  Civitai.md",
     "Generative AI/A curated list of Stable Diffusion Tips, Tricks, and Guides  Civitai.md",
     "Linux/ssh.md",
-    "Networking/FortiNet/Pasted image 20240503073354.png",
     "Networking/FortiNet/Pasted image 20240503081344.png",
     "Networking/FortiNet/Pasted image 20240503073452.png",
     "Networking/FortiNet/Pasted image 20240503073435.png",
-    "Networking/FortiNet/Self Hosting.md",
     "Networking/FortiNet/Pasted image 20240503081230.png",
     "Networking/FortiNet/Pasted image 20240503081241.png",
     "Networking/FortiNet/Pasted image 20240503081047.png",
