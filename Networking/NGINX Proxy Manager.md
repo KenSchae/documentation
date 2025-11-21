@@ -8,7 +8,7 @@ Learn about the difference between forward and reverse proxies, and what you wou
 
 ## Prerequisites
 
-[[Install Ubuntu Linux]] with Docker and Docker Compose installed
+[[Install Base Linux Server]] with Docker and Docker Compose installed
 
 ## Software
 [Nginx Proxy Manager](https://nginxproxymanager.com/)

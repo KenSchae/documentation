@@ -1,40 +1,52 @@
-Optional Maintenance
 
-### Create new sudo account
-Ubuntu Server does this by default
-```
-sudo adduser {username}
-sudo usermod -aG sudo {username}
-```
+## Traditional LAMP
+In the old days, LAMP (Linux, Apache, MySQL, PHP) were the go-to web servers. These days, not as much. You will likely see more architectures centered around Docker or cloud rather than the old school LAMP environments.
 
-### Disable root
-Ubuntu Server does this by default
+### Install Apache Web Server
+
 ```
-sudo passwd -l root
+$ sudo apt install apache2  
+$ sudo systemctl enable apache2  
+$ sudo systemctl start apache2  
 ```
 
-### Change HOSTNAME
-```
-sudo hostnamectl set-hostname {hostname}
-hostnamectl
+#### Test the Apache Web Server installation 
 
-sudo nano /etc/hosts
-/* change hostname in hosts file */
+##### From the server 
+
+If you are logged into the server either directly or from an RDP connection, you can test the Apache installation following these steps. 
+
+Open a web browser on the server and go to: [http://localhost](http://localhost/) 
+
+You should see the Apache2 Ubuntu Default Page that says "It works" 
+
+##### From a computer on the network 
+
+If you want to test from another computer that is on the  same network as the Apache server, you will need some information. Specifically the IP address of the server.  
+
+To get the IP address of the Apache server, login to the server and enter the following command in the terminal: 
+
+```
+$ sudo hostname -I  
+
+or 
+
+$ ifconfig -a
 ```
 
-## Optional Services
+That is a capital I and lower case i will tell you the local IP address which is almost always 127.0.0.1 
 
-### Install xRDP
-If you need to use RDP to access a desktop environment
-```
-sudo apt install xrdp
-sudo systemctl enable xrdp
-```
+From the computer on the network, open a browser window and enter the IP address as the web page URL: [http://ipaddress](http://ipaddress/) For example on mine its [http://192.168.1.12](http://192.168.1.12/) 
 
-### Install GIT
-```
-sudo apt install git
-```
+You should see the same default It works page 
+
+#### The Apache Default Web Site Directory 
+
+The default web site in Apache on Ubuntu is at /var/www/html. If you try to edit or add to this site you will get permissions errors because the folders and files are owned by root. The temptation is to change the ownership of everything to your account and go on from there. While this may be acceptable for a test or dev server, it is a bad habit to get into. Rather use the following procedure to setup virtual web sites in your apache that you will then edit and leave the default web site alone.
+
+
+
+## Other Servers
 
 ### Install Guest Agent for Proxmox
 Applies only if this box is in a Proxmox server
@@ -48,15 +60,6 @@ sudo apt install qemu-guest-agent
 sudo shutdown 
 ```
 
-### Install Webmin
-```
-sudo apt install software-properties-common apt-transport-https
-sudo wget -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] http://download.webmin.com/download/repository sarge contrib"
-sudo apt install webmin
-sudo ufw allow 10000/tcp
-sudo ufw reload
-```
 
 ### bind9 DNS
 ```

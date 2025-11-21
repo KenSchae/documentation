@@ -13,11 +13,13 @@
 	6. [[#Change timezone]]
 	7. [[#Configure Firewall]]
 	8. [[#Install fail2ban]]
+5. [[#Optional Base Software]]
+6. [[#Conclusion]]
 ## Introduction
 
 This guide focuses on installing Linux on a hypervisor of some sort. At least, that is how I most often use this guide: as a checklist for building out a server, dev environment, or something else Linux related. That said, these steps are valid for building out a box as well.
 
-As far as a hypervisor, I have an old HP ProLiant server that is running Windows Server 2019 with Hyper-V installed and I have a newer ProLiant that is running Proxmox. This guide doesn't have the specifics of installing on either hypervisor, but I may add that later.
+As far as a hypervisor, I have an old HP ProLiant server that is running Windows Server 2019 with Hyper-V installed and I have a newer ProLiant that is running Proxmox. This guide assumes that you know how to create a VM using your hypervisor and how to start the server from an ISO.
 ## Pre Install
 
 ### Select distro
@@ -31,6 +33,10 @@ The following four are a handful of distros that have remained popular for more 
 3. [Mint](https://linuxmint.com/)
 4. [Fedora](https://fedoraproject.org/)
 
+*Note: 11/21/25 Lately I have been building out local LLM servers on Pop!_OS Linux because this distro has the NVidia drivers built in. It is based on Ubuntu and is a good distro. If you are building out a box that has NVidia, you may want to go with this.*
+
+- [Pop!_OS]([Pop!_OS by System76](https://system76.com/pop/))
+
 ### Download ISO
 
 When downloading the OS, select an ISO file and try to find the latest stable release or an LTS (Long Term Support) version of the OS. You may select the niche options but these assume that you know what you are doing.
@@ -39,9 +45,14 @@ Store the ISO in a place that is accessible to the hypervisor where you will ins
 
 ## Installation
 
-This section should have two parts. The first would outline the steps for creating a virtual machine on your hypervisor onto which you will install your Linux distro. The second part would outline how to install your distro onto the VM.
+1. Create a VM in your hypervisor
+2. Configure the VM "hardware"
+3. Start the VM from the ISO
+4. Follow the distro's installation steps
 
-Lacking those, I recommend hitting YouTube and the distro's documentation for the step by step to install Linux. It's actually quite easy.
+- [Install Ubuntu Server]([Install Ubuntu Server | Ubuntu](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview)
+- [Install Pop!_OS]([Installing Pop!_OS - System76 Support](https://support.system76.com/articles/install-pop)
+
 ## Post Install
 
 ### Update && Upgrade
@@ -82,11 +93,11 @@ network:
 
 sudo netplan apply
 ```
-Note: in the routes section make sure the to and via line up together.
 
+*The filename of the netplan configuration may not be the same as in the example above.*
 
 ### Install openssh
-You can select this during Ubuntu install
+Ubuntu installation has the option to install OpenSSH as part of the OS installation. You only need to run the install if you skipped this step.
 ```
 sudo apt install openssh-server
 ssh-keygen
@@ -119,6 +130,8 @@ sudo systemctl restart sshd
 ### Fix LVM
 
 This seems to be an Ubuntu thing. Most of the other distros don't need this but it doesn't hurt to check your volumes. Basically, you are making sure that Linux is using the whole hard drive rather than part of it.
+
+*Note: 11/21/25 This does not seem to be an issue anymore, the installer asks to use the whole disk.*
 
 ```
 sudo lvm
@@ -166,4 +179,23 @@ sudo systemctl restart fail2ban
 sudo fail2ban-client status /* use to review banned */
 ```
 
-## [[Other Linux based servers]]
+
+## Optional Base Software
+
+### Install xRDP
+If you need to use RDP to access a desktop environment. Most of the time, you will use SSH to access the command line.
+```
+sudo apt install xrdp
+sudo systemctl enable xrdp
+```
+
+### Install GIT
+```
+sudo apt install git
+```
+
+## Conclusion
+
+At this point you have a solid Linux server. From here move on to install the individual server components that you need.
+
+[[Install Server Software on Base Linux]]
